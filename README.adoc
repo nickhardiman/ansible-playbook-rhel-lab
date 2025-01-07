@@ -1,0 +1,15 @@
+= Ansible playbook for turning three PCs into a set of RHEL VMs
+
+!!! Under construction. Sections marked with !!! and ??? are notes to self. 
+
+Ansible helps me build my home lab. This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that’s the technical term) of Virtual Machines. Each VM runs a set of services that support my home lab.
+
+Idea is to build a model of a business network, complicated enough to help with a wide range of challenges. 
+This home lab emulates a complex IT estate, like you might find in a large organization.
+
+
+== physical machines
+
+image::aap-lab-hardware.jpeg[]
+
+
