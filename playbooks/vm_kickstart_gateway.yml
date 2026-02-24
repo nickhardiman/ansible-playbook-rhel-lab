@@ -1,0 +1,14 @@
+---
+- name: Kickstart a new machine
+  hosts: hypervisor
+  become: true
+  gather_facts: false
+  # vars_files:
+  #   - ~/vault-credentials.yml
+  roles:
+  tasks:
+    - name: "Kickstart VM on hypervisor {{ inventory_hostname }}"
+      ansible.builtin.include_role:
+        name: nickhardiman.libvirt.libvirt_machine_kickstart
+      vars:
+        fqdn: gateway.silvan.uk
