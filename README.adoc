@@ -1,15 +1,46 @@
-= Ansible playbook for turning three PCs into a set of RHEL VMs
+= Playbook to build a home lab full of Red Hat software
 
-!!! Under construction. Sections marked with !!! and ??? are notes to self. 
+Yet another refactor of my home lab automation
 
-Ansible helps me build my home lab. This playbook turns a PC running RHEL 9 into a hypervisor running a pile-load (that’s the technical term) of Virtual Machines. Each VM runs a set of services that support my home lab.
-
-Idea is to build a model of a business network, complicated enough to help with a wide range of challenges. 
-This home lab emulates a complex IT estate, like you might find in a large organization.
-
-
-== physical machines
-
-image::aap-lab-hardware.jpeg[]
+Partly working, partly broken. 
+It has always been this way.
+It will always be this way.
 
 
+== third attempt, RHEL lab 
+
+WIP
+
+network of virtual machines on one fresh RHEL 10 host.
+
+take the AAP2 work and break up into less choking chunks
+
+* https://github.com/nickhardiman/script-rhel-setup
+* https://github.com/nickhardiman/ansible-playbook-rhel-lab
+* https://github.com/nickhardiman/ansible-collection-platform
+* https://github.com/nickhardiman/ansible-collection-libvirt
+* https://github.com/nickhardiman/ansible-collection-vm-gateway
+
+
+== second attempt, AAP2 refarch
+
+couple years ago
+
+network of virtual machines on three fresh RHEL 9 hosts.
+
+worked, but an absolute monster 
+
+* https://github.com/nickhardiman/ansible-playbook-aap-lab
+* https://github.com/nickhardiman/ansible-collection-platform
+
+== first attempt, RHEL lab
+
+few years ago 
+
+network of virtual machines on three fresh RHEL 9 hosts.
+
+* https://github.com/nickhardiman/ansible-playbook-source
+* https://github.com/nickhardiman/ansible-playbook-build
+* https://github.com/nickhardiman/ansible-playbook-supply
+* https://github.com/nickhardiman/ansible-collection-platform
+* https://github.com/nickhardiman/ansible-collection-app
