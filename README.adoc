@@ -6,6 +6,13 @@ Partly working, partly broken.
 It has always been this way.
 It will always be this way.
 
+== Run 
+
+Files my-vault-pass and vault-credentials.yml are created by https://github.com/nickhardiman/script-rhel-setup
+
+----
+ansible-playbook --vault-pass-file=~/my-vault-pass --extra-vars=@~/vault-credentials.yml playbooks/configure_os.yml
+----
 
 == third attempt, RHEL lab 
 

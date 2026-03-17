@@ -1,0 +1,51 @@
+- name: Configure routing from control node to private network
+  hosts: localhost
+  become: true
+  gather_facts: true
+  vars:
+    control_ip: "10.0.2.15"
+    control_gateway: "10.0.2.2"
+    lab_net_prefix: "192.168.134"
+    gateway_ip: "192.168.1.100"
+    hypervisor_ip: "192.168.1.218"
+  roles:
+    - role: rhel-system-roles.network
+      vars:
+        network_connections:
+          - name: enp0s8  # nmcli connection name
+            state: up
+            type: ethernet
+            interface_name: enp0s8  # device name
+            # interface_name defaults to the connection name
+            ip:
+              address:
+                - "{{ control_ip }}/24"
+              gateway4: "{{ control_gateway }}"
+              dns:
+                - 192.168.1.254
+              dns_search:
+                - home
+              route:
+                - network: "{{ lab_net_prefix }}.0"
+                  prefix: 24
+                  gateway: "{{ hypervisor_ip }}"
+                  # gateway: "{{ gateway_ip }}"
+
+
+  tasks:
+
+    # check
+    # still connected to Internet?
+    - name: Run shell commands to check routing
+      ansible.builtin.shell:
+        cmd: "{{ item }}"
+      loop:
+        - ip route list
+        - dig @localhost www.google.com
+        - curl --fail https://www.redhat.com/
+      register: r_route_check
+
+    - name: Display results
+      ansible.builtin.debug:
+        var: r_route_check
+

@@ -1,0 +1,6 @@
+- name: Install Satellite app
+  hosts: satellite
+  become: true
+  gather_facts: false
+  roles:
+  - name: nickhardiman.vm_satellite.install_app

@@ -1,0 +1,8 @@
+---
+
+- name: Add gateway's names and addresses to the hosts file
+  hosts: hypervisor
+  become: true
+  gather_facts: false
+  roles:
+  - name: nickhardiman.vm_gateway.etc_hosts_update

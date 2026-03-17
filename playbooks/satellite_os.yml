@@ -1,0 +1,6 @@
+- name: Configure the OS
+  hosts: satellite
+  become: true
+  gather_facts: false
+  roles:
+  - name: nickhardiman.vm_satellite.configure_os
