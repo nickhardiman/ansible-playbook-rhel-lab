@@ -1,14 +1,4 @@
 ---
-# Run
-#   ansible-playbook --vault-pass-file=~/my-vault-pass --extra-vars=@~/vault-credentials.yml playbooks/vm_gateway.yml
-#
-# These plays are copied from here. 
-# https://github.com/nickhardiman/ansible-collection-vm-gateway/tree/main/playbooks
-#
-# * build_vm.yml
-# * configure_os.yml
-# * update_etc_hosts.yml
-
 
 - name: Build the gateway VM
   hosts: hypervisor
