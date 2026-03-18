@@ -1,4 +1,7 @@
-- name: Configure routing from control node to private network
+---
+# troubleshooting only
+# I got occasional routing and DNS weirdness
+- name: Configure interface on virtualbox guest
   hosts: localhost
   become: true
   gather_facts: true
@@ -13,23 +16,26 @@
       vars:
         network_connections:
           - name: enp0s8  # nmcli connection name
+            autoconnect: yes
             state: up
             type: ethernet
             interface_name: enp0s8  # device name
             # interface_name defaults to the connection name
             ip:
-              address:
-                - "{{ control_ip }}/24"
-              gateway4: "{{ control_gateway }}"
+              dhcp4: yes
+              auto6: yes
+              # address:
+              #   - "{{ control_ip }}/24"
+              # gateway4: "{{ control_gateway }}"
               dns:
                 - 192.168.1.254
               dns_search:
                 - home
-              route:
-                - network: "{{ lab_net_prefix }}.0"
-                  prefix: 24
-                  gateway: "{{ hypervisor_ip }}"
-                  # gateway: "{{ gateway_ip }}"
+              # route:
+              #   - network: "{{ lab_net_prefix }}.0"
+              #     prefix: 24
+              #     # gateway: "{{ hypervisor_ip }}"
+              #     gateway: "{{ gateway_ip }}"
 
 
   tasks:
@@ -41,8 +47,10 @@
         cmd: "{{ item }}"
       loop:
         - ip route list
-        - dig @localhost www.google.com
+        - dig www.google.com
         - curl --fail https://www.redhat.com/
+        - ping -c1 192.168.1.100
+        - ping -c1 192.168.134.5
       register: r_route_check
 
     - name: Display results
