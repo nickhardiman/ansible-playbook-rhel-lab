@@ -27,3 +27,29 @@
   ansible.builtin.import_playbook: playbooks/satellite_app_install.yml
 - name: Satellite config-as-code
   ansible.builtin.import_playbook: playbooks/satellite_app_configure.yml
+
+# now Satellite is up and running, providing services to the private network.
+# It manages DNS and DHCP, 
+# and provisions hosts.
+#
+# !!! whole load of crap to automate
+#     copy CA certificate from installer host to all hypervisor host and VM trust stores
+#       or replace with Letsencrypt
+#     ISO and QCOW2 downloads
+#     golden image build, rhel.silvan.uk:/var/lib/libvirt/images/template-rhel10.silvan.uk.qcow2
+#     Distribute Satellite foreman-proxy key, compute resource and image config
+#     fix DNS forwarding from gateway to Satellite
+#       (zone transfers not often enough, new hosts dont resolve)
+#
+# Add gateway to DNS.
+# Use nsupdate to update Bind on Satellite.
+#    echo -e "server 192.168.134.5\n \
+#    update add gateway.silvan.uk 3600 IN A 192.168.134.3\n \
+#    send\n" | nsupdate -k /etc/rndc.key
+# check
+#    dig @192.168.134.5 gateway.silvan.uk
+#
+# build AAP VM
+# https://github.com/nickhardiman/ansible-playbook-aap-lab/blob/main/playbooks/satellite-host-provision-image.yml
+# install AAP
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/containerized_installation/index

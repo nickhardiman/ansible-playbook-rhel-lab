@@ -1,5 +1,6 @@
 ---
-# !!! hangs on first network reconfig. 
+# !!! RHEL 8 hangs on first network reconfig. 
+# problem might be gone
 # might need 
 #   - name: Reset connection
 #     meta: reset_connection
